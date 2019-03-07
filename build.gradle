@@ -1,0 +1,48 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+
+buildscript {
+    repositories {
+//        google()
+//        jcenter()
+        maven {url 'http://nexus:8081/repository/maven-public/'}
+//        google()
+
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.1'
+        
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+//        google()
+//        jcenter()
+        maven {url 'http://nexus:8081/repository/maven-public/'}
+//        google()
+
+    }
+}
+
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+//ext.iqScanDir = '/Users/camerontownshend/AndroidStudioProjects/MyApplication/app/build/dependencies/release'
+ext.iqScanDir = 'app/build/dependencies/release'
+configurations{
+    iq
+}
+
+task iqScan(type: JavaExec) {
+    def cli = "/Applications/nexusIQ/nexus-iq-cli-1.62.0-01.jar"
+    main = '-jar'
+    // arguments to pass to the IQ CLI
+    args cli , '-s', 'http://iq-server:8070',
+            '-i', 'androidapp',
+            '-a', 'admin:admin123',
+            iqScanDir
+}
