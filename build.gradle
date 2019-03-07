@@ -39,8 +39,8 @@ task iqScan(type: JavaExec) {
     def cli = "/Applications/nexusIQ/nexus-iq-cli-1.62.0-01.jar"
     main = '-jar'
     // arguments to pass to the IQ CLI
-    args cli , '-s', 'http://iq-server:8070',
+    args cli , '-s', 'http://ec2-54-255-162-59.ap-southeast-1.compute.amazonaws.com:8070/',
             '-i', 'androidapp',
-            '-a', 'admin:admin123',
+            '-a', 'admin:**********',
             iqScanDir
 }
