@@ -3,13 +3,14 @@
 
 buildscript {
     repositories {
+//        google()
+//        jcenter()
+        maven {url 'http://nexus:8081/repository/maven-public/'}
         google()
-        jcenter()
-//        maven {url 'http://nexus:8081/repository/maven-public/'}
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.1'
+        classpath 'com.android.tools.build:gradle:3.3.2'
         
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -18,9 +19,9 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
-        jcenter()
-//        maven {url 'http://nexus:8081/repository/maven-public/'}
+//        google()
+//        jcenter()
+        maven {url 'http://nexus:8081/repository/maven-public/'}
 
     }
 }
@@ -31,16 +32,22 @@ task clean(type: Delete) {
 }
 //ext.iqScanDir = '/Users/camerontownshend/AndroidStudioProjects/MyApplication/app/build/dependencies/release'
 ext.iqScanDir = 'app/build/dependencies/release'
+ext.iqServer = 'http://ec2-54-255-162-59.ap-southeast-1.compute.amazonaws.com:8070/'
+ext.iqServerUserName = 'admin'
+ext.iqServerPassword = 'admin123'
+
 configurations{
     iq
 }
 
 task iqScan(type: JavaExec) {
-    def cli = "/Applications/nexusIQ/nexus-iq-cli-1.62.0-01.jar"
+    //https://download.sonatype.com/clm/scanner/nexus-iq-cli-1.62.0-01.jar
+    def cli = "iqscanner/nexus-iq-cli-1.62.0-01.jar"
+    def creds = iqServerUserName + ':' + iqServerPassword
     main = '-jar'
     // arguments to pass to the IQ CLI
-    args cli , '-s', 'http://ec2-54-255-162-59.ap-southeast-1.compute.amazonaws.com:8070/',
+    args cli , '-s', iqServer,
             '-i', 'androidapp',
-            '-a', 'admin:**********',
+            '-a', creds,
             iqScanDir
 }
