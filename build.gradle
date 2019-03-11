@@ -3,10 +3,9 @@
 
 buildscript {
     repositories {
-//        google()
-//        jcenter()
-        maven {url 'http://nexus:8081/repository/maven-public/'}
         google()
+        jcenter()
+//        maven {url 'http://nexus:8081/repository/maven-public/'}
 
     }
     dependencies {
@@ -19,9 +18,9 @@ buildscript {
 
 allprojects {
     repositories {
-//        google()
-//        jcenter()
-        maven {url 'http://nexus:8081/repository/maven-public/'}
+        google()
+        jcenter()
+//        maven {url 'http://nexus:8081/repository/maven-public/'}
 
     }
 }
