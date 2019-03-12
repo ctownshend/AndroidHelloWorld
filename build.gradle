@@ -39,6 +39,19 @@ configurations{
     iq
 }
 
+//task copyDependencies(type: Copy) {
+//    from configurations.productionReleaseRuntimeClasspath
+//    into 'dependencies'
+//}
+
+
+task customTask() {
+    doLast {
+        println '>>>' + project('.').configurations.compile.dependencies
+    }
+}
+
+
 task iqScan(type: JavaExec) {
     //https://download.sonatype.com/clm/scanner/nexus-iq-cli-1.62.0-01.jar
     def cli = "iqscanner/nexus-iq-cli-1.62.0-01.jar"
