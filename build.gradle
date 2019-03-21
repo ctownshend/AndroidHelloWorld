@@ -44,6 +44,7 @@ configurations{
 //    into 'dependencies'
 //}
 
+//tes
 
 task customTask() {
     doLast {
